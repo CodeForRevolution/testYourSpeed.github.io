@@ -44,10 +44,10 @@
         }
 
         .timer{
-            color: red;
+            color:red;
         }
         .gameOverText{
-            color:red;
+            color:black;
         }
         .nav{
             margin: 0px;
@@ -75,9 +75,9 @@
         <h2 class="scoreboard">score:0</h2>
       <div class="instructionboard">
         <h3>instruction</h3>
-        <p>Type the Each word with in the given time to get the score 
-            high
+        <p>if you are playing in mobile words won't case sensitive
         </p>
+
       </div>
     </div>
 
@@ -101,11 +101,7 @@
         
 
         let word=[
-            'hat',
-            'google',
-            'bunny',
             'sunny',
-            'javascript',
             'maccho',
             'peachu',
             'sana',
@@ -116,7 +112,6 @@
             'tohid',
             'mahek',
             'alshifa',
-            'cat',
             'aakash',
             'shivani',
             'purnima',
@@ -142,7 +137,7 @@
             'bhavna',
             'mahera',
             'jaibun',
-            'uasmin',
+            'yasmin',
             'zeba',
             'saba',
             'simmi',
@@ -221,7 +216,7 @@ function match(e){
         showWord(word);
         inputEl.value='';
         score++;
-        scoreboardEl.innerHTML=score;
+        scoreboardEl.innerHTML=`score:${score}`;
 
     }else{
        console.log("word dont matches")
@@ -291,8 +286,20 @@ function checkstatus(){
         console.log("status of the function is over")
         timerEl.innerHTML="";
         gameOverTextEl.innerHTML="Gamer over!!"
+        localStorage.setItem("current", score);
+        const hightscore= localStorage.getItem("highscore");
+        if(hightscore===null){
+            localStorage.setItem("highscore", score);
+        }
+        if(hightscore<score){
+            localStorage.setItem("highscore", score);  
+        }
+        
+      
         score=0;
         scoreboardEl.innerHTML=score;
+        console.log(hightscore);
+        scoreboardEl.innerHTML=`High score:${hightscore}`
     
     }else{
         gameOverTextEl.innerHTML="";
