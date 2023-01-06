@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body{
+            margin: 0px;
+            padding: 0px;
+            background-color: blue;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: white;
+        }
+        .main{
+            border: 3px solid black;
+            height: 500px;
+            width: 400px;
+            text-align: center;
+            background-color: gray;
+            margin: 0px;
+        }
+        .input{
+            height: 25px;
+            width: 200px;
+            font-size: large;
+            border: none;
+            outline: none;
+
+        }
+        .instructionboard{
+            border: 2px solid black;
+            height: 100px;
+            width: 200px;
+        font-size: 15px;
+        margin-left: 22%;
+            
+        }
+        .inputword{
+            color:black;
+        }
+
+        .timer{
+            color: red;
+        }
+        .gameOverText{
+            color:red;
+        }
+        .nav{
+            margin: 0px;
+            padding: 0px;
+            background-color:black;
+        }
+        .nav h1{
+            margin:0px;
+        }
+    </style>
+
+</head>
+<body>
+
+    <div class="main">
+        <div class="nav">
+            <h1>WordBeater</h1>
+        </div>
+      
+        <h3 class="levelup">Type the given word within 5 second</h3>
+        <h1 class="inputword">Sucess</h1>
+        <input type="text" class="input" autofocus="true">
+        <h3 class="timer">5</h3>
+        <h3 class="gameOverText"></h3>
+        <h2 class="scoreboard">score:0</h2>
+      <div class="instructionboard">
+        <h3>instructoin</h3>
+        <p>Type the Eachn word with in the given time to get the score 
+            hight
+        </p>
+      </div>
+    </div>
+
+    <script>
+
+     window.addEventListener("load",init);
+        // const El=document.querySelector("inputword");
+       //global variable
+        let time=5;
+        let score=0;
+       
+        let isplaying=true;
+
+        //DOM element from the html
+        const curentWordEl=document.querySelector(".inputword");
+        const inputEl=document.querySelector(".input");
+        const gameOverTextEl=document.querySelector(".gameOverText");
+        const scoreboardEl=document.querySelector(".scoreboard");
+        const timerEl=document.querySelector(".timer");
+        const levelupEl=document.querySelector(".levelup");
+        
+
+        let word=[
+            'hat',
+            'google',
+            'bunny',
+            'sunny',
+            'javascript',
+            'maccho',
+            'peachu',
+            'sana',
+            'sana',
+            'sana',
+            'sana',
+            'sana',
+            'sana',
+            'sana',
+            'sana',
+            'sana',
+            'sana',
+            'sana',
+            'bunni',
+            'anwar',
+            'muskan',
+            'tohid',
+            'mahek',
+            'alshifa',
+            'cat',
+            'aakash',
+            'shivani',
+            'purnima',
+            'aarti',
+            'anshul',
+            'radha',
+            'sudha',
+            'mafia',
+            'mazhar',
+            'anish',
+            'anas',
+            'hello',
+            'tasneem',
+            'hasnain',
+            'gulapsha',
+            'gullu',
+            'adnan',
+            'sania',
+            'nikhil',
+            'javed',
+            'roshan',
+            'rahina',
+            'bhavna',
+            'mahera',
+            'jaibun',
+            'uasmin',
+            'zeba',
+            'saba',
+            'simmi',
+            'rahem',
+            'mahevish',
+            'sadik',
+            'sahil',
+            'ruby',
+            'tabassum',
+            'shakir',
+            'sana',
+            'shahid',
+            'afroz',
+            'aashu',
+            'juhi',
+            'sahista',
+            'asad',
+            'sama',
+            'simra',
+            'sonu',
+            'sabana',
+            'raja',
+            'abdul',
+            'nemat',
+            'kalam',
+            'ayaan',
+            'sana',
+            'sana',
+            'sana',
+            'sana',
+            'altu',
+            'reyaz',
+            'fatma',
+            'rani',
+            'saima',
+            'majid',
+            'wahid',
+            'hasan',
+
+        ];
+
+
+let intervalkey='';
+
+
+        //intialize the game 
+        function init(){
+            
+            console.log("init");
+            showWord(word);
+           inputEl.addEventListener('input',match)
+            console.log("come to check the why not running")
+            setInterval(coutdown,1000);
+       intervalkey=setInterval(checkstatus,500);
+        }
+ 
+        
+
+
+
+//match function match the word 
+
+function match(e){
+
+    console.log("match fucntion called",e.target.value);
+
+    if(matchwords()){
+      
+        console.log("hurryyyyyy match words")
+        isplaying=true;
+
+        if(score>10){
+          time=4  
+          levelupEl.innerHTML="Now you have to type word in 3 sec"
+        }else{
+            time=6;
+        }
+       
+        showWord(word);
+        inputEl.value='';
+        score++;
+        scoreboardEl.innerHTML=score;
+
+    }else{
+       console.log("word dont matches")
+     
+
+    }
+    console.log("come to the end of the fucntion");
+}
+
+function matchwords(){
+    console.log("matchwords fucntion called",);
+    console.log("word type is ",inputEl.value);
+
+    if(curentWordEl.innerHTML===inputEl.value){
+        return true;
+    }
+
+
+    return false;
+}
+
+
+
+
+
+
+
+//pick and show random word
+
+function showWord(word){
+
+  
+    
+    const randomIndex=Math.floor(Math.random()*word.length);
+    console.log("random index",randomIndex);
+ curentWordEl.innerHTML=word[randomIndex];
+ console.log("showword fucntion called",curentWordEl.innerHTML);
+
+}
+
+
+//count down timer function
+function coutdown(){
+    // console.log("coutndown fucntion called");
+    
+    if(time>0){
+//decrement the time
+time--;
+
+    }
+    else if(time==0)
+    {
+       
+isplaying=false;
+
+    }
+
+    timerEl.innerHTML=time;
+
+}
+
+function checkstatus(){
+   
+    
+    if(!isplaying && time<=0){
+        console.log("status of the function is over")
+        timerEl.innerHTML="";
+        gameOverTextEl.innerHTML="Gamer over!!"
+        score=0;
+        scoreboardEl.innerHTML=score;
+    
+    }else{
+        gameOverTextEl.innerHTML="";
+    }
+   
+
+}
+    </script>
+    
+</body>
+</html>
