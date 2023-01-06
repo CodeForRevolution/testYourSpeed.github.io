@@ -233,9 +233,10 @@ function match(e){
 
 function matchwords(){
     console.log("matchwords fucntion called",);
-    console.log("word type is ",inputEl.value);
+    console.log("word type is ",inputEl.value.toLowerCase());
 
-    if(curentWordEl.innerHTML===inputEl.value){
+
+    if(curentWordEl.innerHTML===inputEl.value.toLowerCase()){
         return true;
     }
 
